@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turno Fácil | Consultar turno</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        .consulta {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .marca {
+            text-align: center;
+            color: #2563eb;
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1f2937;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .descripcion {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .resultado {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .numero-turno {
+            font-size: 60px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 20px 0;
+        }
+
+        .atendiendo {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .atendido {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .cancelado {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .error {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fee2e2;
+            color: #b91c1c;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .volver {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .volver:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 12px;
+            }
+
+            .contenedor {
+                margin: 15px auto;
+            }
+
+            .consulta {
+                padding: 25px 18px;
+                border-radius: 10px;
+            }
+
+            .marca {
+                font-size: 23px;
+            }
+
+            h1 {
+                font-size: 27px;
+            }
+
+            .descripcion {
+                font-size: 15px;
+                margin-bottom: 25px;
+            }
+
+            input {
+                padding: 14px;
+                font-size: 16px;
+            }
+
+            button {
+                padding: 15px;
+                font-size: 17px;
+            }
+
+            .resultado {
+                padding: 20px 15px;
+            }
+
+            .numero-turno {
+                font-size: 52px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="consulta">
+
+        <div class="marca">
+            🎫 Turno Fácil
+        </div>
+
+        <div class="subtitulo">
+            Gestión de turnos sencilla y organizada
+        </div>
+
+        <h1>🔎 Consultar mi turno</h1>
+
+        <p class="descripcion">
+            Ingresa el número de tu turno para consultar su estado.
+        </p>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label for="numero">
+                Número de turno
+            </label>
+
+            <input
+                type="number"
+                id="numero"
+                name="numero"
+                placeholder="Ej: 15"
+                min="1"
+                required
+            >
+
+            <button type="submit">
+                Consultar turno
+            </button>
+
+        </form>
+
+        {% if turno %}
+
+            <div class="resultado">
+
+                <h2>Turno encontrado</h2>
+
+                <div class="numero-turno">
+                    #{{ turno.numero }}
+                </div>
+
+                <p>
+                    <strong>Cliente:</strong>
+                    {{ turno.cliente }}
+                </p>
+
+                <p>
+                    <strong>Estado:</strong>
+                    {{ turno.get_estado_display }}
+                </p>
+
+                {% if turno.estado == 'pendiente' %}
+
+                    <p>
+                        <strong>Personas delante:</strong>
+                        {{ personas_delante }}
+                    </p>
+
+                {% elif turno.estado == 'atendiendo' %}
+
+                    <p class="atendiendo">
+                        🟢 Tu turno está siendo atendido.
+                    </p>
+
+                {% elif turno.estado == 'atendido' %}
+
+                    <p class="atendido">
+                        ✅ Tu turno ya fue atendido.
+                    </p>
+
+                {% elif turno.estado == 'cancelado' %}
+
+                    <p class="cancelado">
+                        ❌ Este turno fue cancelado.
+                    </p>
+
+                {% endif %}
+
+                <p>
+                    <strong>Fecha:</strong>
+                    {{ turno.fecha|date:"d/m/Y H:i" }}
+                </p>
+
+            </div>
+
+        {% elif request.method == 'POST' %}
+
+            <div class="error">
+                No encontramos un turno con ese número.
+            </div>
+
+        {% endif %}
+
+        <a class="volver" href="{% url 'inicio' %}">
+            ← Volver al inicio
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

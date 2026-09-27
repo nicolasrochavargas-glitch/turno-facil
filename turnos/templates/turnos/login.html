@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Acceso de empleados</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+    }
+
+    .contenedor {
+        width: 100%;
+        max-width: 420px;
+        margin: 50px auto;
+    }
+
+    .login {
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+        text-align: center;
+        color: #1f2937;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .descripcion {
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 30px;
+        line-height: 1.5;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #374151;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px;
+        margin-bottom: 20px;
+        border: 1px solid #d1d5db;
+        border-radius: 7px;
+        font-size: 16px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #2563eb;
+    }
+
+    button {
+        width: 100%;
+        padding: 15px;
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-size: 17px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #1d4ed8;
+    }
+
+    .error {
+        background: #fee2e2;
+        color: #b91c1c;
+        padding: 12px;
+        border-radius: 7px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .volver {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        color: #2563eb;
+        text-decoration: none;
+    }
+
+    /* Adaptación para celulares */
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 12px;
+        }
+
+        .contenedor {
+            margin: 20px auto;
+        }
+
+        .login {
+            padding: 25px 18px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 27px;
+        }
+
+        .descripcion {
+            font-size: 15px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            padding: 14px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 15px;
+            font-size: 17px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<div class="contenedor">
+
+    <div class="login">
+
+        <h1>🔐 Acceso de empleados</h1>
+
+        <p class="descripcion">
+            Ingresa tus credenciales para acceder al panel.
+        </p>
+
+        {% if form.errors %}
+
+            <div class="error">
+                Usuario o contraseña incorrectos.
+            </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <label for="id_username">
+                Usuario
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                id="id_username"
+                required
+            >
+
+            <label for="id_password">
+                Contraseña
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                id="id_password"
+                required
+            >
+
+            <button type="submit">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <a class="volver" href="{% url 'inicio' %}">
+            ← Volver al inicio
+        </a>
+
+    </div>
+
+</div>
+```
+
+</body>
+
+</html>

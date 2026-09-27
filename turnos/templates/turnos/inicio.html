@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Turno Fácil</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f4f6f8;
+        color: #1f2937;
+    }
+
+    .contenedor {
+        width: 90%;
+        max-width: 1100px;
+        margin: 50px auto;
+    }
+
+    .encabezado {
+        background: #1f2937;
+        color: white;
+        padding: 45px 30px;
+        border-radius: 18px;
+        text-align: center;
+    }
+
+    .encabezado h1 {
+        margin: 0 0 12px;
+        font-size: 42px;
+    }
+
+    .encabezado p {
+        margin: 0;
+        color: #cbd5e1;
+        font-size: 18px;
+    }
+
+    .seccion {
+        margin-top: 30px;
+    }
+
+    .seccion h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .tarjetas {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .tarjeta {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+        text-align: center;
+    }
+
+    .icono {
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+
+    .tarjeta h3 {
+        margin: 10px 0;
+        font-size: 23px;
+    }
+
+    .tarjeta p {
+        color: #64748b;
+        line-height: 1.5;
+    }
+
+    .botones {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .boton {
+        display: block;
+        padding: 13px;
+        border-radius: 8px;
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+    }
+
+    .azul {
+        background: #2563eb;
+    }
+
+    .azul:hover {
+        background: #1d4ed8;
+    }
+
+    .verde {
+        background: #16a34a;
+    }
+
+    .verde:hover {
+        background: #15803d;
+    }
+
+    .gris {
+        background: #475569;
+    }
+
+    .gris:hover {
+        background: #334155;
+    }
+
+    .turnos {
+        margin-top: 35px;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    }
+
+    .turno {
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+
+    .numero {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .estado {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background: #fef3c7;
+    }
+
+    .sin-turnos {
+        text-align: center;
+        color: #64748b;
+    }
+
+    @media (max-width: 700px) {
+
+        .tarjetas {
+            grid-template-columns: 1fr;
+        }
+
+        .encabezado h1 {
+            font-size: 30px;
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .contenedor {
+            width: 94%;
+            margin: 25px auto;
+        }
+
+        .encabezado {
+            padding: 35px 20px;
+        }
+
+        .tarjetas {
+            grid-template-columns: 1fr;
+        }
+
+    }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <div class="encabezado">
+
+        <h1>🎫 Turno Fácil</h1>
+
+        <p>
+            Gestiona tus turnos de forma sencilla, rápida y organizada
+        </p>
+
+    </div>
+
+
+    <div class="seccion">
+
+        <h2>¿Qué deseas hacer?</h2>
+
+        <div class="tarjetas">
+
+            <!-- CLIENTE -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    🎫
+                </div>
+
+                <h3>Cliente</h3>
+
+                <p>
+                    Solicita un nuevo turno o consulta
+                    el estado de un turno existente.
+                </p>
+
+                <div class="botones">
+
+                    <a
+                        class="boton azul"
+                        href="{% url 'solicitar_turno' %}"
+                    >
+                        Solicitar turno
+                    </a>
+
+                    <a
+                        class="boton verde"
+                        href="{% url 'consultar_turno' %}"
+                    >
+                        Consultar mi turno
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMPLEADO -->
+
+            <div class="tarjeta">
+
+                <div class="icono">
+                    👨‍💼
+                </div>
+
+                <h3>Empleado</h3>
+
+                <p>
+                    Accede al panel para administrar,
+                    atender y gestionar los turnos.
+                </p>
+
+                <div class="botones">
+
+                    <a
+                        class="boton gris"
+                        href="{% url 'panel_turnos' %}"
+                    >
+                        Acceder al panel
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PANTALLA PÚBLICA -->
+
+    <div class="seccion">
+
+        <div class="tarjeta">
+
+            <div class="icono">
+                📺
+            </div>
+
+            <h3>Pantalla de atención</h3>
+
+            <p>
+                Consulta el turno que está siendo atendido
+                y los próximos turnos.
+            </p>
+
+            <div class="botones">
+
+                <a
+                    class="boton gris"
+                    href="{% url 'pantalla_publica' %}"
+                >
+                    Ver pantalla de turnos
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TURNOS REGISTRADOS -->
+
+    <div class="turnos">
+
+        <h2>Turnos registrados</h2>
+
+        {% if turnos %}
+
+            {% for turno in turnos %}
+
+                <div class="turno">
+
+                    <div class="numero">
+                        Turno #{{ turno.numero }}
+                    </div>
+
+                    <p>
+                        <strong>Cliente:</strong>
+                        {{ turno.cliente }}
+                    </p>
+
+                    <p>
+                        <strong>Fecha:</strong>
+                        {{ turno.fecha|date:"d/m/Y H:i" }}
+                    </p>
+
+                    <span class="estado">
+                        {{ turno.get_estado_display }}
+                    </span>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <p class="sin-turnos">
+                No hay turnos registrados.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

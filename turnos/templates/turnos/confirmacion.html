@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turno Fácil | Turno solicitado</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 600px;
+            margin: 60px auto;
+        }
+
+        .marca {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .marca h2 {
+            margin: 0;
+            color: #1f2937;
+            font-size: 32px;
+        }
+
+        .marca p {
+            margin: 6px 0 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .confirmacion {
+            background: white;
+            padding: 45px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .icono {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #16a34a;
+            margin-bottom: 10px;
+        }
+
+        .mensaje {
+            color: #64748b;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .numero {
+            font-size: 70px;
+            font-weight: bold;
+            color: #2563eb;
+            margin: 25px 0;
+        }
+
+        .cliente {
+            font-size: 18px;
+            color: #374151;
+            margin-bottom: 15px;
+        }
+
+        .necesidad {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0 30px;
+            text-align: left;
+        }
+
+        .necesidad-titulo {
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+
+        .necesidad-texto {
+            color: #64748b;
+            line-height: 1.5;
+            word-wrap: break-word;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .boton:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 600px) {
+
+            .contenedor {
+                width: 94%;
+                margin: 30px auto;
+            }
+
+            .marca h2 {
+                font-size: 28px;
+            }
+
+            .confirmacion {
+                padding: 30px 20px;
+            }
+
+            .icono {
+                font-size: 50px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .mensaje {
+                font-size: 16px;
+            }
+
+            .numero {
+                font-size: 60px;
+            }
+
+            .cliente {
+                font-size: 17px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <div class="marca">
+            <h2>🎫 Turno Fácil</h2>
+            <p>Gestión de turnos sencilla y organizada</p>
+        </div>
+
+        <div class="confirmacion">
+
+            <div class="icono">
+                ✅
+            </div>
+
+            <h1>¡Turno solicitado!</h1>
+
+            <p class="mensaje">
+                Tu solicitud fue registrada correctamente.
+            </p>
+
+            <div class="numero">
+                #{{ turno.numero }}
+            </div>
+
+            <div class="cliente">
+                Cliente: <strong>{{ turno.cliente }}</strong>
+            </div>
+
+            <div class="necesidad">
+
+                <div class="necesidad-titulo">
+                    ¿Qué necesitas?
+                </div>
+
+                <div class="necesidad-texto">
+                    {{ turno.necesidad }}
+                </div>
+
+            </div>
+
+            <a class="boton" href="{% url 'inicio' %}">
+                Volver al inicio
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

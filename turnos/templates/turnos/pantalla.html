@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turno Fácil | Pantalla de atención</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 0;
+        }
+
+        .encabezado {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .encabezado h1 {
+            font-size: 40px;
+            margin: 0 0 10px;
+        }
+
+        .encabezado p {
+            color: #cbd5e1;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .turno-actual {
+            background: white;
+            color: #0f172a;
+            border-radius: 20px;
+            padding: 45px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .turno-actual h2 {
+            margin: 0;
+            color: #64748b;
+            font-size: 22px;
+        }
+
+        .numero {
+            font-size: 90px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2563eb;
+        }
+
+        .mensaje {
+            font-size: 22px;
+            color: #475569;
+        }
+
+        .proximos {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .proximos h2 {
+            margin: 0;
+            text-align: center;
+        }
+
+        .lista {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .proximo {
+            background: #334155;
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .proximo-numero {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .proximo-cliente {
+            margin-top: 8px;
+            color: #cbd5e1;
+            word-break: break-word;
+        }
+
+        .sin-turno {
+            text-align: center;
+            color: #cbd5e1;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 800px) {
+
+            .contenedor {
+                width: 94%;
+                padding: 30px 0;
+            }
+
+            .encabezado {
+                margin-bottom: 30px;
+            }
+
+            .encabezado h1 {
+                font-size: 32px;
+            }
+
+            .encabezado p {
+                font-size: 17px;
+            }
+
+            .turno-actual {
+                padding: 35px 20px;
+            }
+
+            .numero {
+                font-size: 75px;
+            }
+
+            .mensaje {
+                font-size: 20px;
+            }
+
+            .proximos {
+                padding: 25px 18px;
+            }
+
+            .proximo {
+                min-width: 120px;
+                padding: 18px 20px;
+            }
+
+        }
+
+
+        /* CELULAR */
+
+        @media (max-width: 500px) {
+
+            .contenedor {
+                width: 94%;
+                padding: 20px 0;
+            }
+
+            .encabezado {
+                margin-bottom: 20px;
+            }
+
+            .encabezado h1 {
+                font-size: 25px;
+                line-height: 1.3;
+            }
+
+            .encabezado p {
+                font-size: 15px;
+            }
+
+            .turno-actual {
+                padding: 28px 15px;
+                border-radius: 15px;
+                margin-bottom: 20px;
+            }
+
+            .turno-actual h2 {
+                font-size: 18px;
+            }
+
+            .numero {
+                font-size: 65px;
+                margin: 15px 0;
+            }
+
+            .mensaje {
+                font-size: 17px;
+                line-height: 1.4;
+            }
+
+            .proximos {
+                padding: 22px 12px;
+                border-radius: 15px;
+            }
+
+            .proximos h2 {
+                font-size: 20px;
+            }
+
+            .lista {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .proximo {
+                min-width: 0;
+                padding: 15px 10px;
+            }
+
+            .proximo-numero {
+                font-size: 25px;
+            }
+
+            .proximo-cliente {
+                font-size: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <div class="encabezado">
+
+            <h1>
+                🎫 Turno Fácil
+            </h1>
+
+            <p>
+                Pantalla de atención al cliente
+            </p>
+
+        </div>
+
+
+        <div class="turno-actual">
+
+            <h2>
+                🔔 TURNO EN ATENCIÓN
+            </h2>
+
+            {% if turno_actual %}
+
+                <div class="numero">
+                    #{{ turno_actual.numero }}
+                </div>
+
+                <div class="mensaje">
+                    Por favor, diríjase al módulo de atención.
+                </div>
+
+            {% else %}
+
+                <div class="numero">
+                    —
+                </div>
+
+                <div class="mensaje">
+                    No hay ningún turno en atención.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="proximos">
+
+            <h2>
+                📋 Próximos turnos
+            </h2>
+
+            {% if proximos_turnos %}
+
+                <div class="lista">
+
+                    {% for turno in proximos_turnos %}
+
+                        <div class="proximo">
+
+                            <div class="proximo-numero">
+                                #{{ turno.numero }}
+                            </div>
+
+                            <div class="proximo-cliente">
+                                {{ turno.cliente }}
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% else %}
+
+                <div class="sin-turno">
+                    No hay turnos pendientes.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        setInterval(function() {
+            location.reload();
+        }, 3000);
+
+    </script>
+
+</body>
+
+</html>

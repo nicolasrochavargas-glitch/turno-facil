@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Turno Fácil | Panel</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            margin: 0;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* ENCABEZADO */
+
+        .encabezado {
+            background: #0f172a;
+            color: white;
+            padding: 25px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .marca h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .marca p {
+            margin: 6px 0 0;
+            color: #cbd5e1;
+        }
+
+        .inicio {
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .inicio:hover {
+            background: #1d4ed8;
+        }
+
+        .encabezado form {
+            margin: 0;
+        }
+
+        .encabezado form button {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .encabezado form button:hover {
+            background: #b91c1c;
+        }
+
+
+        /* CONTENEDOR */
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+
+        /* RESUMEN */
+
+        .resumen {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+
+        .tarjeta h3 {
+            margin: 0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .numero-resumen {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+
+        /* TITULO */
+
+        .titulo-seccion {
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .titulo-seccion h2 {
+            margin: 0;
+        }
+
+        .titulo-seccion p {
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        .siguiente {
+            background: #16a34a;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .siguiente:hover {
+            background: #15803d;
+        }
+
+
+        /* BUSQUEDA */
+
+        .busqueda {
+            margin-bottom: 20px;
+        }
+
+        .busqueda input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .busqueda input:focus {
+            border-color: #2563eb;
+        }
+
+
+        /* FILTROS */
+
+        .filtros {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .filtros button {
+            border: none;
+            background: white;
+            color: #334155;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            border: 1px solid #cbd5e1;
+        }
+
+        .filtros button:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+
+        /* TURNOS */
+
+        .turno {
+            background: white;
+            padding: 22px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .informacion {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .numero {
+            font-size: 25px;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .cliente {
+            font-size: 17px;
+            margin-top: 8px;
+            word-break: break-word;
+        }
+
+        .fecha {
+            color: #64748b;
+            margin-top: 6px;
+        }
+
+
+        /* NECESIDAD */
+
+        .necesidad {
+            margin-top: 12px;
+            padding: 12px 15px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 7px;
+        }
+
+        .necesidad-titulo {
+            font-weight: bold;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        .necesidad-texto {
+            color: #64748b;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+
+        /* ESTADOS */
+
+        .estado {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .pendiente {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .atendiendo {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .atendido {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .cancelado {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+
+        /* BOTONES DE ACCIONES */
+
+        .acciones {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .acciones a {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            font-weight: bold;
+            color: white;
+            background: #2563eb;
+            text-align: center;
+        }
+
+        .acciones a:hover {
+            opacity: 0.85;
+        }
+
+        .acciones a:last-child {
+            background: #dc2626;
+        }
+
+
+        /* MENSAJE VACIO */
+
+        .vacio {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border-radius: 12px;
+            color: #64748b;
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 800px) {
+
+            .resumen {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .turno {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .acciones {
+                justify-content: stretch;
+            }
+
+            .acciones a {
+                flex: 1;
+            }
+
+            .encabezado {
+                flex-wrap: wrap;
+            }
+
+        }
+
+
+        /* CELULAR */
+
+        @media (max-width: 500px) {
+
+            body {
+                font-size: 15px;
+            }
+
+            .encabezado {
+                padding: 20px 5%;
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .marca h1 {
+                font-size: 23px;
+            }
+
+            .marca p {
+                font-size: 14px;
+            }
+
+            .inicio,
+            .encabezado form button {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+
+            .contenedor {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .resumen {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .tarjeta {
+                padding: 16px;
+            }
+
+            .tarjeta h3 {
+                font-size: 13px;
+            }
+
+            .numero-resumen {
+                font-size: 27px;
+            }
+
+            .titulo-seccion {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 15px;
+            }
+
+            .titulo-seccion h2 {
+                font-size: 22px;
+            }
+
+            .siguiente {
+                display: block;
+                text-align: center;
+                width: 100%;
+            }
+
+            .filtros {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .filtros button {
+                width: 100%;
+                padding: 11px 8px;
+            }
+
+            .turno {
+                padding: 18px;
+            }
+
+            .numero {
+                font-size: 23px;
+            }
+
+            .cliente {
+                font-size: 16px;
+            }
+
+            .fecha {
+                font-size: 14px;
+            }
+
+            .necesidad {
+                font-size: 14px;
+            }
+
+            .acciones {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .acciones a {
+                width: 100%;
+                padding: 13px;
+            }
+
+            .vacio {
+                padding: 30px 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="encabezado">
+
+        <div class="marca">
+
+            <h1>
+                🎫 Turno Fácil
+            </h1>
+
+            <p>
+                Panel de administración y control de turnos
+            </p>
+
+        </div>
+
+        <a class="inicio" href="{% url 'inicio' %}">
+            ← Inicio
+        </a>
+
+        <form method="POST" action="{% url 'logout' %}">
+
+            {% csrf_token %}
+
+            <button type="submit">
+                🚪 Cerrar sesión
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <div class="contenedor">
+
+
+        <!-- RESUMEN -->
+
+        <div class="resumen">
+
+            <div class="tarjeta">
+
+                <h3>
+                    Total de turnos
+                </h3>
+
+                <div class="numero-resumen">
+                    {{ total }}
+                </div>
+
+            </div>
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    Pendientes
+                </h3>
+
+                <div class="numero-resumen">
+                    {{ pendientes }}
+                </div>
+
+            </div>
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    En atención
+                </h3>
+
+                <div class="numero-resumen">
+                    {{ atendiendo }}
+                </div>
+
+            </div>
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    Finalizados
+                </h3>
+
+                <div class="numero-resumen">
+                    {{ atendidos }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LISTA DE TURNOS -->
+
+        <div class="titulo-seccion">
+
+            <div>
+
+                <h2>
+                    Turnos registrados
+                </h2>
+
+                <p>
+                    Gestiona los turnos de los clientes desde este panel.
+                </p>
+
+            </div>
+
+            <a class="siguiente" href="{% url 'llamar_siguiente' %}">
+                📢 Llamar siguiente turno
+            </a>
+
+        </div>
+
+
+        <!-- BUSQUEDA -->
+
+        <div class="busqueda">
+
+            <input
+                type="text"
+                id="buscar"
+                placeholder="🔎 Buscar por cliente, número, estado o necesidad..."
+                onkeyup="buscarTurno()"
+            >
+
+        </div>
+
+
+        <!-- FILTROS -->
+
+        <div class="filtros">
+
+            <button onclick="filtrarTurnos('todos')">
+                Todos
+            </button>
+
+            <button onclick="filtrarTurnos('pendiente')">
+                Pendientes
+            </button>
+
+            <button onclick="filtrarTurnos('atendiendo')">
+                Atendiendo
+            </button>
+
+            <button onclick="filtrarTurnos('atendido')">
+                Atendidos
+            </button>
+
+            <button onclick="filtrarTurnos('cancelado')">
+                Cancelados
+            </button>
+
+        </div>
+
+
+        <!-- TURNOS -->
+
+        {% for turno in turnos %}
+
+            <div class="turno">
+
+                <div class="informacion">
+
+                    <div class="numero">
+                        Turno #{{ turno.numero }}
+                    </div>
+
+
+                    <div class="cliente">
+
+                        <strong>
+                            Cliente:
+                        </strong>
+
+                        {{ turno.cliente }}
+
+                    </div>
+
+
+                    <div class="fecha">
+
+                        📅 {{ turno.fecha|date:"d/m/Y" }}
+
+                        &nbsp;&nbsp;
+
+                        🕐 {{ turno.fecha|date:"H:i" }}
+
+                    </div>
+
+
+                    <div class="necesidad">
+
+                        <div class="necesidad-titulo">
+                            ¿Qué necesita?
+                        </div>
+
+                        <div class="necesidad-texto">
+                            {{ turno.necesidad }}
+                        </div>
+
+                    </div>
+
+
+                    <span class="estado {{ turno.estado }}">
+
+                        {{ turno.get_estado_display }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="acciones">
+
+                    {% if turno.estado == 'pendiente' %}
+
+                        <a href="{% url 'cambiar_estado' turno.id 'atendiendo' %}">
+                            Atender
+                        </a>
+
+                    {% endif %}
+
+
+                    {% if turno.estado == 'atendiendo' %}
+
+                        <a href="{% url 'cambiar_estado' turno.id 'atendido' %}">
+                            Finalizar
+                        </a>
+
+                    {% endif %}
+
+
+                    {% if turno.estado != 'atendido' and turno.estado != 'cancelado' %}
+
+                        <a href="{% url 'cambiar_estado' turno.id 'cancelado' %}">
+                            Cancelar
+                        </a>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        {% empty %}
+
+            <div class="vacio">
+
+                <h3>
+                    No hay turnos registrados
+                </h3>
+
+                <p>
+                    Los nuevos turnos aparecerán aquí.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+    <script>
+
+        function buscarTurno() {
+
+            let texto = document
+                .getElementById("buscar")
+                .value
+                .toLowerCase();
+
+            let turnos = document.querySelectorAll(".turno");
+
+            turnos.forEach(function(turno) {
+
+                let contenido = turno
+                    .innerText
+                    .toLowerCase();
+
+                if (contenido.includes(texto)) {
+
+                    turno.style.display = "flex";
+
+                } else {
+
+                    turno.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        function filtrarTurnos(estado) {
+
+            let turnos = document.querySelectorAll(".turno");
+
+            turnos.forEach(function(turno) {
+
+                if (estado === "todos") {
+
+                    turno.style.display = "flex";
+
+                    return;
+
+                }
+
+                let estadoTurno =
+                    turno.querySelector(".estado").classList;
+
+                if (estadoTurno.contains(estado)) {
+
+                    turno.style.display = "flex";
+
+                } else {
+
+                    turno.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
