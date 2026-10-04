@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,41 +18,51 @@
             margin: 0;
             padding: 20px;
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
+            background: #f0fdf4;
+            color: #1f2937;
         }
 
         .contenedor {
             width: 100%;
-            max-width: 500px;
+            max-width: 550px;
             margin: 40px auto;
         }
 
+        /* CONTENEDOR */
+
         .consulta {
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 38px;
+            border-radius: 22px;
+            border: 1px solid #dcfce7;
+            box-shadow: 0 10px 35px rgba(22, 163, 74, 0.08);
         }
+
+        /* MARCA */
 
         .marca {
             text-align: center;
-            color: #2563eb;
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            color: #166534;
+            font-size: 30px;
+            font-weight: 800;
         }
 
         .subtitulo {
             text-align: center;
             color: #64748b;
             margin-bottom: 30px;
+            font-size: 15px;
         }
+
+        /* TÍTULO */
 
         h1 {
             text-align: center;
-            color: #1f2937;
+            color: #166534;
             margin-top: 0;
             margin-bottom: 10px;
+            font-size: 28px;
         }
 
         .descripcion {
@@ -60,6 +71,8 @@
             margin-bottom: 30px;
             line-height: 1.5;
         }
+
+        /* FORMULARIO */
 
         label {
             display: block;
@@ -72,83 +85,120 @@
             width: 100%;
             padding: 14px;
             border: 1px solid #d1d5db;
-            border-radius: 7px;
+            border-radius: 10px;
             font-size: 16px;
             margin-bottom: 20px;
+            transition: 0.2s;
         }
 
         input:focus {
             outline: none;
-            border-color: #2563eb;
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
         }
 
         button {
             width: 100%;
             padding: 15px;
-            background: #2563eb;
+            background: #22c55e;
             color: white;
             border: none;
-            border-radius: 7px;
+            border-radius: 10px;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         button:hover {
-            background: #1d4ed8;
+            background: #16a34a;
+            transform: translateY(-2px);
         }
+
+        /* RESULTADO */
 
         .resultado {
             margin-top: 30px;
-            padding: 25px;
-            background: #f1f5f9;
-            border-radius: 12px;
+            padding: 28px 20px;
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 18px;
             text-align: center;
         }
 
+        .resultado h2 {
+            margin-top: 0;
+            color: #166534;
+            font-size: 22px;
+        }
+
         .numero-turno {
-            font-size: 60px;
-            font-weight: bold;
-            color: #2563eb;
-            margin: 20px 0;
+            font-size: 64px;
+            font-weight: 800;
+            color: #16a34a;
+            margin: 18px 0;
+        }
+
+        .resultado p {
+            color: #475569;
+            margin: 12px 0;
         }
 
         .atendiendo {
-            color: #16a34a;
+            color: #15803d !important;
             font-weight: bold;
+            background: #dcfce7;
+            padding: 12px;
+            border-radius: 10px;
         }
 
         .atendido {
-            color: #2563eb;
+            color: #166534 !important;
             font-weight: bold;
+            background: #dcfce7;
+            padding: 12px;
+            border-radius: 10px;
         }
 
         .cancelado {
-            color: #dc2626;
+            color: #b91c1c !important;
             font-weight: bold;
+            background: #fee2e2;
+            padding: 12px;
+            border-radius: 10px;
         }
+
+        /* ERROR */
 
         .error {
             margin-top: 30px;
             padding: 20px;
-            background: #fee2e2;
+            background: #fef2f2;
             color: #b91c1c;
-            border-radius: 10px;
+            border: 1px solid #fecaca;
+            border-radius: 12px;
             text-align: center;
+            font-weight: bold;
         }
+
+        /* VOLVER */
 
         .volver {
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 22px;
             padding: 10px;
-            color: #2563eb;
+            color: #166534;
             text-decoration: none;
+            font-weight: bold;
         }
 
         .volver:hover {
+            color: #15803d;
             text-decoration: underline;
         }
+
+        /* CELULAR */
 
         @media (max-width: 600px) {
 
@@ -161,16 +211,16 @@
             }
 
             .consulta {
-                padding: 25px 18px;
-                border-radius: 10px;
+                padding: 28px 20px;
+                border-radius: 18px;
             }
 
             .marca {
-                font-size: 23px;
+                font-size: 26px;
             }
 
             h1 {
-                font-size: 27px;
+                font-size: 25px;
             }
 
             .descripcion {
@@ -184,17 +234,18 @@
             }
 
             button {
-                padding: 15px;
+                padding: 16px;
                 font-size: 17px;
             }
 
             .resultado {
-                padding: 20px 15px;
+                padding: 22px 15px;
             }
 
             .numero-turno {
-                font-size: 52px;
+                font-size: 54px;
             }
+
         }
 
     </style>
@@ -207,6 +258,8 @@
 
     <div class="consulta">
 
+        <!-- MARCA -->
+
         <div class="marca">
             🎫 Turno Fácil
         </div>
@@ -215,11 +268,19 @@
             Gestión de turnos sencilla y organizada
         </div>
 
-        <h1>🔎 Consultar mi turno</h1>
+
+        <!-- TÍTULO -->
+
+        <h1>
+            🔎 Consultar mi turno
+        </h1>
 
         <p class="descripcion">
             Ingresa el número de tu turno para consultar su estado.
         </p>
+
+
+        <!-- FORMULARIO -->
 
         <form method="POST">
 
@@ -239,16 +300,21 @@
             >
 
             <button type="submit">
-                Consultar turno
+                🔎 Consultar turno
             </button>
 
         </form>
+
+
+        <!-- RESULTADO -->
 
         {% if turno %}
 
             <div class="resultado">
 
-                <h2>Turno encontrado</h2>
+                <h2>
+                    Turno encontrado
+                </h2>
 
                 <div class="numero-turno">
                     #{{ turno.numero }}
@@ -263,6 +329,7 @@
                     <strong>Estado:</strong>
                     {{ turno.get_estado_display }}
                 </p>
+
 
                 {% if turno.estado == 'pendiente' %}
 
@@ -291,6 +358,7 @@
 
                 {% endif %}
 
+
                 <p>
                     <strong>Fecha:</strong>
                     {{ turno.fecha|date:"d/m/Y H:i" }}
@@ -301,10 +369,13 @@
         {% elif request.method == 'POST' %}
 
             <div class="error">
-                No encontramos un turno con ese número.
+                ⚠️ No encontramos un turno con ese número.
             </div>
 
         {% endif %}
+
+
+        <!-- VOLVER -->
 
         <a class="volver" href="{% url 'inicio' %}">
             ← Volver al inicio

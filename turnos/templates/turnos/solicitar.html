@@ -1,66 +1,92 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Turno Fácil | Solicitar turno</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
             margin: 0;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f0fdf4;
+            color: #1f2937;
         }
 
         .contenedor {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
+            width: 92%;
+            max-width: 650px;
+            margin: 40px auto;
         }
+
+        /* MARCA */
 
         .marca {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #dcfce7;
+            border-radius: 50%;
+            font-size: 38px;
         }
 
         .marca h1 {
             margin: 0;
-            color: #1f2937;
+            color: #166534;
             font-size: 34px;
+            font-weight: 800;
         }
 
         .marca p {
-            margin: 7px 0 0;
+            margin: 8px 0 0;
             color: #64748b;
             font-size: 15px;
         }
 
+        /* FORMULARIO */
+
         .formulario {
             background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 38px;
+            border-radius: 22px;
+            border: 1px solid #dcfce7;
+            box-shadow: 0 10px 35px rgba(22, 163, 74, 0.08);
         }
 
         .formulario h2 {
             text-align: center;
-            color: #1f2937;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-size: 27px;
+            color: #166534;
+            margin: 0 0 10px;
+            font-size: 28px;
         }
 
         .descripcion {
             text-align: center;
-            color: #6b7280;
-            margin-bottom: 30px;
+            color: #64748b;
+            margin: 0 0 30px;
             line-height: 1.5;
+        }
+
+        /* CAMPOS */
+
+        .campo {
+            margin-bottom: 20px;
         }
 
         label {
@@ -74,63 +100,85 @@
         textarea {
             width: 100%;
             padding: 14px;
-            margin-bottom: 20px;
             border: 1px solid #d1d5db;
-            border-radius: 7px;
+            border-radius: 10px;
             font-size: 16px;
             font-family: Arial, sans-serif;
-            background: white;
+            background: #ffffff;
+            transition: 0.2s;
         }
 
         textarea {
-            min-height: 110px;
+            min-height: 120px;
             resize: vertical;
         }
 
         input:focus,
         textarea:focus {
             outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+            border-color: #22c55e;
+            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
         }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #94a3b8;
+        }
+
+        /* BOTÓN */
 
         button {
             width: 100%;
             padding: 15px;
-            background: #2563eb;
+            margin-top: 5px;
+            background: #22c55e;
             color: white;
             border: none;
-            border-radius: 7px;
+            border-radius: 10px;
             font-size: 17px;
             font-weight: bold;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         button:hover {
-            background: #1d4ed8;
+            background: #16a34a;
+            transform: translateY(-2px);
         }
+
+        /* VOLVER */
 
         .volver {
             display: block;
             text-align: center;
-            margin-top: 20px;
-            color: #2563eb;
+            margin-top: 22px;
+            color: #166534;
             text-decoration: none;
-            padding: 10px;
+            font-weight: bold;
         }
 
         .volver:hover {
+            color: #15803d;
             text-decoration: underline;
         }
+
+        /* CELULAR */
 
         @media (max-width: 600px) {
 
             body {
-                padding: 12px;
+                padding: 10px;
             }
 
             .contenedor {
+                width: 100%;
                 margin: 15px auto;
+            }
+
+            .logo {
+                width: 62px;
+                height: 62px;
+                font-size: 32px;
             }
 
             .marca h1 {
@@ -138,12 +186,12 @@
             }
 
             .formulario {
-                padding: 25px 18px;
-                border-radius: 10px;
+                padding: 28px 20px;
+                border-radius: 18px;
             }
 
             .formulario h2 {
-                font-size: 24px;
+                font-size: 25px;
             }
 
             .descripcion {
@@ -158,21 +206,38 @@
             }
 
             button {
-                padding: 15px;
+                padding: 16px;
                 font-size: 17px;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
     <div class="contenedor">
 
+        <!-- MARCA -->
+
         <div class="marca">
-            <h1>🎫 Turno Fácil</h1>
-            <p>Gestión de turnos sencilla y organizada</p>
+
+            <div class="logo">
+                🎫
+            </div>
+
+            <h1>Turno Fácil</h1>
+
+            <p>
+                Gestión de turnos sencilla y organizada
+            </p>
+
         </div>
+
+
+        <!-- FORMULARIO -->
 
         <div class="formulario">
 
@@ -182,50 +247,78 @@
                 Completa los datos para solicitar tu turno.
             </p>
 
+
             <form method="POST">
 
                 {% csrf_token %}
 
-                <label for="cliente">
-                    Nombre del cliente
-                </label>
 
-                <input
-                    type="text"
-                    id="cliente"
-                    name="cliente"
-                    placeholder="Ej: Juan Pérez"
-                    required
-                >
+                <!-- NOMBRE -->
 
-                <label for="fecha">
-                    Fecha y hora
-                </label>
+                <div class="campo">
 
-                <input
-                    type="datetime-local"
-                    id="fecha"
-                    name="fecha"
-                    required
-                >
+                    <label for="cliente">
+                        Nombre del cliente
+                    </label>
 
-                <label for="necesidad">
-                    ¿Qué necesitas?
-                </label>
+                    <input
+                        type="text"
+                        id="cliente"
+                        name="cliente"
+                        placeholder="Ej: Juan Pérez"
+                        required
+                    >
 
-                <textarea
-                    id="necesidad"
-                    name="necesidad"
-                    rows="4"
-                    placeholder="Cuéntanos brevemente qué necesitas..."
-                    required
-                ></textarea>
+                </div>
+
+
+                <!-- FECHA -->
+
+                <div class="campo">
+
+                    <label for="fecha">
+                        Fecha y hora
+                    </label>
+
+                    <input
+                        type="datetime-local"
+                        id="fecha"
+                        name="fecha"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- NECESIDAD -->
+
+                <div class="campo">
+
+                    <label for="necesidad">
+                        ¿Qué necesitas?
+                    </label>
+
+                    <textarea
+                        id="necesidad"
+                        name="necesidad"
+                        rows="4"
+                        placeholder="Cuéntanos brevemente qué necesitas..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- BOTÓN -->
 
                 <button type="submit">
-                    Solicitar turno
+                    🎫 Solicitar turno
                 </button>
 
             </form>
+
+
+            <!-- VOLVER -->
 
             <a class="volver" href="{% url 'inicio' %}">
                 ← Volver al inicio
@@ -236,4 +329,5 @@
     </div>
 
 </body>
+
 </html>
