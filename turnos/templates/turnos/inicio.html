@@ -1,220 +1,314 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html lang="es">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Turno Fácil</title>
+    <title>Turno Fácil | Bienvenidos</title>
 
 <style>
 
+    :root {
+        --verde: #34764a;
+        --verde-oscuro: #245333;
+        --verde-claro: #edf6e9;
+        --fondo: #f8faf7;
+        --texto: #26352a;
+        --gris: #68756b;
+        --blanco: #ffffff;
+    }
+
     * {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
     }
 
     body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #f0fdf4;
-        color: #1f2937;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--fondo);
+        color: var(--texto);
+        line-height: 1.6;
     }
 
-    .contenedor {
-        width: 92%;
-        max-width: 1100px;
-        margin: 40px auto;
+    a {
+        text-decoration: none;
     }
 
-    /* ENCABEZADO */
+    /* BARRA SUPERIOR */
 
-    .encabezado {
-        background: linear-gradient(135deg, #86efac, #4ade80);
-        color: #f1f5f2;
-        padding: 50px 30px;
-        border-radius: 24px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(22, 163, 74, 0.15);
+    header {
+     background: linear-gradient(135deg, #166534, #22c55e);
+        border-bottom: 1px solid #e5ebe2;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .navbar {
+        width: 95%;
+        margin: auto;
+        padding: 18px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
     }
 
     .logo {
-        font-size: 52px;
-        margin-bottom: 8px;
+        color: var(--blanco);
+        font-size: 25px;
+        font-weight: bold;
+        white-space: nowrap;
     }
 
-    .encabezado h1 {
-        margin: 0 0 10px;
-        font-size: 42px;
-        font-weight: 800;
+    .logo span {
+        color: var(--blanco);
     }
 
-    .encabezado p {
-        margin: 0;
-        color: #166534;
-        font-size: 18px;
-    }
-
-    /* SECCIONES */
-
-    .seccion {
-        margin-top: 35px;
-    }
-
-    .seccion h2 {
-        text-align: center;
-        margin-bottom: 25px;
-        font-size: 28px;
-        color: #166534;
-    }
-
-    /* TARJETAS */
-
-    .tarjetas {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+    .nav-links {
+        display: flex;
+        align-items: center;
         gap: 25px;
     }
 
-    .tarjeta {
-        background: white;
-        padding: 32px;
-        border-radius: 20px;
-        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
-        text-align: center;
-        border: 1px solid #dcfce7;
-        transition: transform 0.2s, box-shadow 0.2s;
+    .nav-links a {
+        color: var(--texto);
+        font-size: 14px;
+        font-weight: 600;
+        transition: color 0.2s;
     }
 
-    .tarjeta:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 30px rgba(22, 163, 74, 0.12);
+    .nav-links a:hover {
+        color: var(--verde);
     }
 
-    .icono {
-        width: 75px;
-        height: 75px;
-        margin: 0 auto 15px;
-        display: flex;
+    .nav-links .btn-empleado {
+        background: var(--verde);
+        color: var(--blanco);
+        padding: 10px 16px;
+        border-radius: 8px;
+    }
+
+    .nav-links .btn-empleado:hover {
+        background: var(--verde-oscuro);
+        color: var(--blanco);
+    }
+
+    /* PRESENTACIÓN */
+
+    .hero {
+        width: 95%;
+        margin: auto;
+        background: var(--verde-claro);
+        padding: 75px 24px;
+    }
+
+    .hero-contenido {
+        width: 100%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         align-items: center;
-        justify-content: center;
-        background: #dcfce7;
-        border-radius: 50%;
-        font-size: 38px;
+        gap: 55px;
     }
 
-    .tarjeta h3 {
-        margin: 10px 0;
-        font-size: 24px;
-        color: #166534;
-    }
-
-    .tarjeta p {
-        color: #64748b;
-        line-height: 1.6;
-        margin-bottom: 5px;
-    }
-
-    /* BOTONES */
-
-    .botones {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 22px;
-    }
-
-    .boton {
-        display: block;
-        padding: 14px;
-        border-radius: 10px;
-        text-decoration: none;
+    .etiqueta {
+        display: inline-block;
+        background: #dcebd6;
+        color: var(--verde-oscuro);
+        padding: 7px 13px;
+        border-radius: 20px;
+        font-size: 13px;
         font-weight: bold;
-        transition: 0.2s;
+        margin-bottom: 18px;
     }
 
-    .principal {
-        background: #22c55e;
-        color: white;
+    .hero h1 {
+        color: var(--verde-oscuro);
+        font-size: clamp(34px, 4vw, 52px);
+        line-height: 1.15;
+        margin-bottom: 22px;
     }
 
-    .principal:hover {
-        background: #16a34a;
-        transform: translateY(-2px);
+    .hero p {
+        color: #526456;
+        font-size: 17px;
+        margin-bottom: 18px;
     }
 
-    .secundario {
-        background: #dcfce7;
-        color: #166534;
+    .hero .descripcion {
+        font-size: 15px;
     }
 
-    .secundario:hover {
-        background: #bbf7d0;
+    .hero-imagen {
+        min-height: 340px;
+        border-radius: 20px;
+        background:
+            linear-gradient(
+                135deg,
+                rgba(36, 83, 51, 0.12),
+                rgba(36, 83, 51, 0.02)
+            ),
+            url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85")
+            center / cover;
+        box-shadow: 0 15px 35px rgba(36, 83, 51, 0.12);
     }
 
-    .oscuro {
-        background: #166534;
-        color: white;
+    /* INFORMACIÓN DEL NEGOCIO */
+
+    .seccion {
+        width: 95%;
+        margin: auto;
+        padding: 65px 24px;
     }
 
-    .oscuro:hover {
-        background: #14532d;
-        transform: translateY(-2px);
+    .seccion h2 {
+        color: var(--verde-oscuro);
+        font-size: 30px;
+        margin-bottom: 15px;
     }
 
-    /* PANTALLA PÚBLICA */
-
-    .pantalla {
-        margin-top: 25px;
+    .seccion-intro {
+        color: var(--gris);
+        max-width: 750px;
+        margin-bottom: 35px;
     }
 
-    /* PIE */
+    .informacion {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
 
-    .pie {
-        text-align: center;
-        margin-top: 35px;
-        color: #64748b;
+    .info-card {
+        background: var(--blanco);
+        border: 1px solid #e5ebe2;
+        padding: 26px;
+        border-radius: 14px;
+    }
+
+    .info-card .icono {
+        font-size: 27px;
+        margin-bottom: 12px;
+    }
+
+    .info-card h3 {
+        color: var(--verde-oscuro);
+        margin-bottom: 10px;
+        font-size: 18px;
+    }
+
+    .info-card p {
+        color: var(--gris);
         font-size: 14px;
     }
 
-    /* CELULAR */
+    /* CONTACTO */
 
-    @media (max-width: 700px) {
+    .contacto {
+        width: 95%;
+        margin: auto;
+        background: var(--verde-oscuro);
+        color: var(--blanco);
+        padding: 45px 24px;
+    }
 
-        .contenedor {
-            width: 94%;
-            margin: 20px auto;
+    .contacto-contenido {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+    }
+
+    .contacto h2 {
+        font-size: 25px;
+        margin-bottom: 8px;
+    }
+
+    .contacto p {
+        color: #e1ebe2;
+        font-size: 14px;
+    }
+
+    .contacto a {
+        color: var(--verde-oscuro);
+        background: var(--blanco);
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+
+    .contacto a:hover {
+        background: #edf6e9;
+    }
+
+    /* PIE DE PÁGINA */
+
+    footer {
+        padding: 22px 24px;
+        text-align: center;
+        color: var(--verde);
+        font-size: 13px;
+        background: var(--blanco);
+    }
+
+    /* DISEÑO PARA CELULARES */
+
+    @media (max-width: 800px) {
+
+        .navbar {
+            width: 95%;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .encabezado {
-            padding: 38px 20px;
+        .nav-links {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 18px;
         }
 
-        .logo {
-            font-size: 45px;
+        .nav-links a {
+            font-size: 13px;
         }
 
-        .encabezado h1 {
-            font-size: 32px;
+        .hero {
+            width: 95%;
+            padding: 45px 20px;
         }
 
-        .encabezado p {
-            font-size: 16px;
+        .hero-contenido {
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
-        .tarjetas {
+        .hero-imagen {
+            min-height: 260px;
+        }
+
+        .seccion {
+            width: 95%;
+        }
+
+        .informacion {
             grid-template-columns: 1fr;
         }
 
-        .seccion h2 {
-            font-size: 24px;
+        .contacto {
+            width: 95%;
         }
 
-        .tarjeta {
-            padding: 27px 22px;
+        .contacto-contenido {
+            flex-direction: column;
+            align-items: flex-start;
         }
-
     }
 
 </style>
@@ -223,145 +317,195 @@
 
 <body>
 
-<div class="contenedor">
 
-    <!-- ENCABEZADO -->
+<!-- BARRA SUPERIOR -->
 
-    <div class="encabezado">
+<header>
 
-        <div class="logo">
-            🎫
+    <nav class="navbar">
+
+        <a href="{% url 'inicio' %}" class="logo">
+            🎫 Turno <span>Fácil</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{% url 'solicitar_turno' %}">
+                Soy cliente
+            </a>
+
+            <a href="{% url 'login' %}" class="btn-empleado">
+                Iniciar sesión
+            </a>
+
+            <a href="{% url 'pantalla_publica' %}" target="_blank">
+                Pantalla de turnos
+            </a>
+
         </div>
 
-        <h1>Turno Fácil</h1>
+    </nav>
 
-        <p>
-            Gestiona tus turnos de forma sencilla, rápida y organizada
+</header>
+
+
+<!-- PRESENTACIÓN DEL NEGOCIO -->
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-contenido">
+
+            <div>
+
+                <span class="etiqueta">
+                    Bienvenidos
+                </span>
+
+                <h1>
+                    Bienvenidos a nuestro negocio
+                </h1>
+
+                <p>
+                    Nos importa tu tiempo y queremos ofrecerte
+                    una atención organizada, cómoda y sencilla.
+                </p>
+
+                <p class="descripcion">
+                    Con nuestro sistema de turnos puedes solicitar
+                    tu turno desde tu celular y consultar su estado
+                    sin necesidad de hacer largas filas.
+                </p>
+
+            </div>
+
+
+            <div class="hero-imagen"
+                 role="img"
+                 aria-label="Imagen de las instalaciones del negocio">
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- INFORMACIÓN DEL LOCAL -->
+
+    <section class="seccion">
+
+        <h2>
+            Conoce nuestro negocio
+        </h2>
+
+        <p class="seccion-intro">
+            Trabajamos para brindarte una buena experiencia,
+            facilitar tu atención y ayudarte a aprovechar mejor
+            tu tiempo.
         </p>
 
-    </div>
 
+        <div class="informacion">
 
-    <!-- OPCIONES -->
-
-    <div class="seccion">
-
-        <h2>¿Qué deseas hacer?</h2>
-
-        <div class="tarjetas">
-
-            <!-- CLIENTE -->
-
-            <div class="tarjeta">
+            <article class="info-card">
 
                 <div class="icono">
-                    🎫
+                    🏢
                 </div>
 
-                <h3>Cliente</h3>
+                <h3>
+                    Sobre nosotros
+                </h3>
 
                 <p>
-                    Solicita un nuevo turno o consulta
-                    el estado de un turno existente.
+                    Aquí irá la historia, la presentación y la
+                    información principal del negocio.
                 </p>
 
-                <div class="botones">
-
-                    <a
-                        class="boton principal"
-                        href="{% url 'solicitar_turno' %}"
-                    >
-                        Solicitar turno
-                    </a>
-
-                    <a
-                        class="boton secundario"
-                        href="{% url 'consultar_turno' %}"
-                    >
-                        Consultar mi turno
-                    </a>
-
-                </div>
-
-            </div>
+            </article>
 
 
-            <!-- EMPLEADO -->
-
-            <div class="tarjeta">
+            <article class="info-card">
 
                 <div class="icono">
-                    👨‍💼
+                    🛠️
                 </div>
 
-                <h3>Empleado</h3>
+                <h3>
+                    Nuestros servicios
+                </h3>
 
                 <p>
-                    Accede al panel para administrar,
-                    atender y gestionar los turnos.
+                    Aquí se describirán los productos o servicios
+                    que ofrece el establecimiento.
                 </p>
 
-                <div class="botones">
+            </article>
 
-                    <a
-                        class="boton oscuro"
-                        href="{% url 'panel_turnos' %}"
-                    >
-                        Acceder al panel
-                    </a>
 
+            <article class="info-card">
+
+                <div class="icono">
+                    🕒
                 </div>
 
-            </div>
+                <h3>
+                    Horarios de atención
+                </h3>
+
+                <p>
+                    Lunes a sábado: [Agregar horario].<br>
+                    Domingos y festivos: [Agregar horario].
+                </p>
+
+            </article>
 
         </div>
 
-    </div>
+    </section>
 
 
-    <!-- PANTALLA PÚBLICA -->
+    <!-- CONTACTO -->
 
-    <div class="seccion pantalla">
+    <section class="contacto">
 
-        <div class="tarjeta">
+        <div class="contacto-contenido">
 
-            <div class="icono">
-                📺
-            </div>
+            <div>
 
-            <h3>Pantalla de atención</h3>
+                <h2>
+                    ¿Necesitas más información?
+                </h2>
 
-            <p>
-                Consulta el turno que está siendo atendido
-                y los próximos turnos.
-            </p>
-
-            <div class="botones">
-
-                <a
-                    class="boton secundario"
-                    href="{% url 'pantalla_publica' %}"
-                >
-                    Ver pantalla de turnos
-                </a>
+                <p>
+                    Agrega aquí la dirección, el teléfono
+                    o el correo de contacto del negocio.
+                </p>
 
             </div>
+
+
+            <a href="{% url 'consultar_turno' %}">
+                Consultar mi turno
+            </a>
 
         </div>
 
-    </div>
+    </section>
+
+</main>
 
 
-    <!-- PIE -->
+<!-- PIE DE PÁGINA -->
 
-    <div class="pie">
+<footer>
 
-        Turno Fácil · Gestión de turnos
+    © {% now "Y" %} Turno Fácil.
+    Todos los derechos reservados.
 
-    </div>
+</footer>
 
-</div>
 
 </body>
-
 </html>

@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Turno Fácil | Consultar turno</title>
+    <title>Consultar turno - Turno Fácil</title>
 
     <style>
+        :root {
+            --verde: #6FAF7B;
+            --verde-oscuro: #4F8F5C;
+            --verde-claro: #EAF6EC;
+            --fondo: #F7FBF7;
+            --texto: #26352A;
+            --gris: #68756B;
+            --blanco: #FFFFFF;
+        }
 
         * {
             box-sizing: border-box;
@@ -16,375 +22,322 @@
 
         body {
             margin: 0;
-            padding: 20px;
+            min-height: 100vh;
             font-family: Arial, sans-serif;
-            background: #f0fdf4;
-            color: #1f2937;
+            background: var(--verde-claro);
+            color: var(--texto);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ondas decorativas */
+        .onda {
+            position: fixed;
+            width: 120%;
+            height: 300px;
+            left: -10%;
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .onda-1 {
+            top: -170px;
+            background: #DCEEDF;
+            transform: rotate(-5deg);
+        }
+
+        .onda-2 {
+            bottom: -190px;
+            background: #C9E4CE;
+            transform: rotate(4deg);
+        }
+
+        .onda-3 {
+            bottom: -240px;
+            background: #B8DABF;
+            transform: rotate(-3deg);
         }
 
         .contenedor {
-            width: 100%;
-            max-width: 550px;
-            margin: 40px auto;
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 45px 0;
+            position: relative;
+            z-index: 1;
         }
-
-        /* CONTENEDOR */
 
         .consulta {
-            background: white;
-            padding: 38px;
-            border-radius: 22px;
-            border: 1px solid #dcfce7;
-            box-shadow: 0 10px 35px rgba(22, 163, 74, 0.08);
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+            background: var(--blanco);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(79, 143, 92, 0.15);
         }
-
-        /* MARCA */
 
         .marca {
             text-align: center;
-            margin-bottom: 8px;
-            color: #166534;
-            font-size: 30px;
-            font-weight: 800;
+            margin-bottom: 25px;
         }
 
-        .subtitulo {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 30px;
+        .marca h1 {
+            margin: 0;
+            color: var(--verde-oscuro);
+            font-size: 32px;
+        }
+
+        .marca p {
+            margin: 8px 0 0;
+            color: var(--gris);
             font-size: 15px;
         }
 
-        /* TÍTULO */
-
-        h1 {
+        .consulta h2 {
             text-align: center;
-            color: #166534;
             margin-top: 0;
             margin-bottom: 10px;
-            font-size: 28px;
+            color: var(--texto);
         }
 
         .descripcion {
             text-align: center;
-            color: #64748b;
+            color: var(--gris);
             margin-bottom: 30px;
-            line-height: 1.5;
         }
 
-        /* FORMULARIO */
+        .campo {
+            margin-bottom: 20px;
+        }
 
-        label {
+        .campo label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #374151;
+            color: var(--texto);
         }
 
-        input {
+        .campo input {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #d1d5db;
+            padding: 13px 15px;
+            border: 1px solid #D4E3D7;
             border-radius: 10px;
             font-size: 16px;
-            margin-bottom: 20px;
-            transition: 0.2s;
-        }
-
-        input:focus {
             outline: none;
-            border-color: #22c55e;
-            box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.12);
+            background: #FCFEFC;
         }
 
-        button {
+        .campo input:focus {
+            border-color: var(--verde);
+            box-shadow: 0 0 0 3px rgba(111, 175, 123, 0.15);
+        }
+
+        .boton {
             width: 100%;
-            padding: 15px;
-            background: #22c55e;
-            color: white;
             border: none;
+            padding: 14px;
             border-radius: 10px;
-            font-size: 17px;
+            background: var(--verde);
+            color: white;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: 0.2s;
         }
 
-        button:hover {
-            background: #16a34a;
-            transform: translateY(-2px);
+        .boton:hover {
+            background: var(--verde-oscuro);
+            transform: translateY(-1px);
         }
-
-        /* RESULTADO */
 
         .resultado {
-            margin-top: 30px;
-            padding: 28px 20px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            border-radius: 18px;
-            text-align: center;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            background: var(--verde-claro);
+            border: 1px solid #CDE2D1;
         }
 
-        .resultado h2 {
+        .resultado h3 {
             margin-top: 0;
-            color: #166534;
-            font-size: 22px;
-        }
-
-        .numero-turno {
-            font-size: 64px;
-            font-weight: 800;
-            color: #16a34a;
-            margin: 18px 0;
-        }
-
-        .resultado p {
-            color: #475569;
-            margin: 12px 0;
-        }
-
-        .atendiendo {
-            color: #15803d !important;
-            font-weight: bold;
-            background: #dcfce7;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .atendido {
-            color: #166534 !important;
-            font-weight: bold;
-            background: #dcfce7;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        .cancelado {
-            color: #b91c1c !important;
-            font-weight: bold;
-            background: #fee2e2;
-            padding: 12px;
-            border-radius: 10px;
-        }
-
-        /* ERROR */
-
-        .error {
-            margin-top: 30px;
-            padding: 20px;
-            background: #fef2f2;
-            color: #b91c1c;
-            border: 1px solid #fecaca;
-            border-radius: 12px;
             text-align: center;
+            color: var(--verde-oscuro);
+        }
+
+        .dato {
+            margin: 10px 0;
+            font-size: 15px;
+        }
+
+        .dato strong {
+            color: var(--texto);
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: var(--verde);
+            color: white;
             font-weight: bold;
         }
 
-        /* VOLVER */
+        .mensaje {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #F3F7F3;
+            text-align: center;
+            color: var(--gris);
+        }
 
         .volver {
             display: block;
             text-align: center;
-            margin-top: 22px;
-            padding: 10px;
-            color: #166534;
+            margin-top: 20px;
+            color: var(--verde-oscuro);
             text-decoration: none;
             font-weight: bold;
         }
 
         .volver:hover {
-            color: #15803d;
             text-decoration: underline;
         }
 
-        /* CELULAR */
-
         @media (max-width: 600px) {
-
-            body {
-                padding: 12px;
-            }
-
             .contenedor {
-                margin: 15px auto;
+                width: 95%;
+                padding: 30px 0;
             }
 
             .consulta {
-                padding: 28px 20px;
-                border-radius: 18px;
+                padding: 25px 20px;
             }
 
-            .marca {
-                font-size: 26px;
+            .marca h1 {
+                font-size: 27px;
             }
-
-            h1 {
-                font-size: 25px;
-            }
-
-            .descripcion {
-                font-size: 15px;
-                margin-bottom: 25px;
-            }
-
-            input {
-                padding: 14px;
-                font-size: 16px;
-            }
-
-            button {
-                padding: 16px;
-                font-size: 17px;
-            }
-
-            .resultado {
-                padding: 22px 15px;
-            }
-
-            .numero-turno {
-                font-size: 54px;
-            }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
-<div class="contenedor">
+    <div class="onda onda-1"></div>
+    <div class="onda onda-2"></div>
+    <div class="onda onda-3"></div>
 
-    <div class="consulta">
+    <div class="contenedor">
 
-        <!-- MARCA -->
+        <div class="consulta">
 
-        <div class="marca">
-            🎫 Turno Fácil
-        </div>
+            <div class="marca">
+                <h1>🎫 Turno Fácil</h1>
+                <p>Consulta el estado de tu turno</p>
+            </div>
 
-        <div class="subtitulo">
-            Gestión de turnos sencilla y organizada
-        </div>
+            <h2>🔎 Consultar mi turno</h2>
 
+            <p class="descripcion">
+                Ingresa el número de tu turno para conocer su estado.
+            </p>
 
-        <!-- TÍTULO -->
+            <form method="POST">
+                {% csrf_token %}
 
-        <h1>
-            🔎 Consultar mi turno
-        </h1>
+                <div class="campo">
+                    <label for="numero">Número de turno</label>
 
-        <p class="descripcion">
-            Ingresa el número de tu turno para consultar su estado.
-        </p>
-
-
-        <!-- FORMULARIO -->
-
-        <form method="POST">
-
-            {% csrf_token %}
-
-            <label for="numero">
-                Número de turno
-            </label>
-
-            <input
-                type="number"
-                id="numero"
-                name="numero"
-                placeholder="Ej: 15"
-                min="1"
-                required
-            >
-
-            <button type="submit">
-                🔎 Consultar turno
-            </button>
-
-        </form>
-
-
-        <!-- RESULTADO -->
-
-        {% if turno %}
-
-            <div class="resultado">
-
-                <h2>
-                    Turno encontrado
-                </h2>
-
-                <div class="numero-turno">
-                    #{{ turno.numero }}
+                    <input
+                        type="number"
+                        id="numero"
+                        name="numero"
+                        min="1"
+                        placeholder="Ejemplo: 15"
+                        required
+                    >
                 </div>
 
-                <p>
-                    <strong>Cliente:</strong>
-                    {{ turno.cliente }}
-                </p>
+                <button type="submit" class="boton">
+                    🔎 Consultar turno
+                </button>
+            </form>
 
-                <p>
-                    <strong>Estado:</strong>
-                    {{ turno.get_estado_display }}
-                </p>
+            {% if turno %}
 
+                <div class="resultado">
 
-                {% if turno.estado == 'pendiente' %}
+                    <h3>Información de tu turno</h3>
 
-                    <p>
-                        <strong>Personas delante:</strong>
-                        {{ personas_delante }}
-                    </p>
+                    <div class="dato">
+                        <strong>Turno:</strong>
+                        {{ turno.numero }}
+                    </div>
 
-                {% elif turno.estado == 'atendiendo' %}
+                    <div class="dato">
+                        <strong>Cliente:</strong>
+                        {{ turno.cliente }}
+                    </div>
 
-                    <p class="atendiendo">
-                        🟢 Tu turno está siendo atendido.
-                    </p>
+                    <div class="dato">
+                        <strong>Estado:</strong>
+                        <span class="estado">
+                            {{ turno.get_estado_display }}
+                        </span>
+                    </div>
 
-                {% elif turno.estado == 'atendido' %}
+                    {% if turno.estado == 'pendiente' %}
 
-                    <p class="atendido">
-                        ✅ Tu turno ya fue atendido.
-                    </p>
+                        <div class="mensaje">
+                            Hay
+                            <strong>{{ personas_delante }}</strong>
+                            persona(s) delante de ti.
+                        </div>
 
-                {% elif turno.estado == 'cancelado' %}
+                    {% elif turno.estado == 'atendiendo' %}
 
-                    <p class="cancelado">
-                        ❌ Este turno fue cancelado.
-                    </p>
+                        <div class="mensaje">
+                            🎉 ¡Tu turno está siendo atendido!
+                        </div>
 
-                {% endif %}
+                    {% elif turno.estado == 'atendido' %}
 
+                        <div class="mensaje">
+                            ✅ Tu turno ya fue atendido.
+                        </div>
 
-                <p>
-                    <strong>Fecha:</strong>
-                    {{ turno.fecha|date:"d/m/Y H:i" }}
-                </p>
+                    {% elif turno.estado == 'cancelado' %}
 
-            </div>
+                        <div class="mensaje">
+                            ❌ Tu turno fue cancelado.
+                        </div>
 
-        {% elif request.method == 'POST' %}
+                    {% endif %}
 
-            <div class="error">
-                ⚠️ No encontramos un turno con ese número.
-            </div>
+                    <div class="dato">
+                        <strong>Fecha:</strong>
+                        {{ turno.fecha|date:"d/m/Y H:i" }}
+                    </div>
 
-        {% endif %}
+                </div>
 
+            {% elif request.method == 'POST' %}
 
-        <!-- VOLVER -->
+                <div class="mensaje">
+                    ❌ No se encontró un turno con ese número.
+                </div>
 
-        <a class="volver" href="{% url 'inicio' %}">
-            ← Volver al inicio
-        </a>
+            {% endif %}
+
+            <a href="{% url 'inicio' %}" class="volver">
+                ← Volver al inicio
+            </a>
+
+        </div>
 
     </div>
 
-</div>
-
 </body>
-
 </html>

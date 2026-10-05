@@ -1,374 +1,481 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Turno Fácil | Pantalla de atención</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
+<title>Turno Fácil | Pantalla de atención</title>
 
-        * {
-            box-sizing: border-box;
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        font-family: Arial, sans-serif;
+        background: #f0fdf4;
+        color: #166534;
+    }
+
+    body {
+        min-height: 100vh;
+    }
+
+    /* BARRA SUPERIOR */
+
+    .barra-superior {
+        width: 95%;
+        margin: 0 auto;
+        background: white;
+        border-bottom: 2px solid #bbf7d0;
+        padding: 14px 25px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .marca {
+        font-size: 24px;
+        font-weight: 800;
+        color: #166534;
+    }
+
+    .volver-inicio {
+        display: inline-block;
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+        padding: 9px 15px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+    .volver-inicio:hover {
+        background: #dcfce7;
+        border-color: #86efac;
+    }
+
+    /* CONTENIDO PRINCIPAL */
+
+    .pantalla {
+        width: 95%;
+        margin: 0 auto;
+        min-height: calc(100vh - 65px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ENCABEZADO */
+
+    .encabezado {
+        text-align: center;
+        padding: 25px 20px 20px;
+    }
+
+    .logo {
+        font-size: 42px;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
+
+    .encabezado h1 {
+        font-size: 40px;
+        margin: 0 0 5px;
+        font-weight: 800;
+        color: #166534;
+    }
+
+    .encabezado p {
+        color: #64748b;
+        font-size: 17px;
+        margin: 0;
+    }
+
+    /* TURNO ACTUAL */
+
+    .turno-actual {
+        width: 100%;
+        background: white;
+        border: 2px solid #bbf7d0;
+        border-radius: 22px;
+        padding: 35px 20px;
+        text-align: center;
+        box-shadow: 0 8px 25px rgba(22, 163, 74, 0.08);
+    }
+
+    .turno-actual h2 {
+        margin: 0;
+        color: #64748b;
+        font-size: 21px;
+        font-weight: 700;
+    }
+
+    .numero {
+        font-size: clamp(80px, 13vw, 150px);
+        font-weight: 800;
+        margin: 12px 0;
+        color: #16a34a;
+        line-height: 1;
+    }
+
+    .mensaje {
+        font-size: clamp(18px, 2vw, 25px);
+        color: #475569;
+    }
+
+    .actualizando {
+        display: inline-block;
+        margin-top: 12px;
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    /* PRÓXIMOS TURNOS */
+
+    .proximos {
+        width: 100%;
+        flex: 1;
+        background: #166534;
+        padding: 30px;
+        margin-top: 25px;
+        border-radius: 22px 22px 0 0;
+    }
+
+    .proximos h2 {
+        margin: 0;
+        text-align: center;
+        color: white;
+        font-size: 26px;
+    }
+
+    .lista {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 18px;
+        margin-top: 25px;
+    }
+
+    .proximo {
+        background: white;
+        color: #166534;
+        padding: 20px;
+        border-radius: 14px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.10);
+    }
+
+    .proximo-numero {
+        font-size: 34px;
+        font-weight: 800;
+    }
+
+    .proximo-cliente {
+        margin-top: 7px;
+        color: #64748b;
+        font-size: 15px;
+        word-break: break-word;
+    }
+
+    .sin-turno {
+        text-align: center;
+        color: #dcfce7;
+        font-size: 19px;
+        margin-top: 25px;
+    }
+
+    /* TABLET */
+
+    @media (max-width: 800px) {
+
+        .barra-superior {
+            width: 95%;
+            padding: 12px 18px;
         }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f0fdf4;
-            color: #166534;
-            min-height: 100vh;
+        .marca {
+            font-size: 21px;
         }
 
-        .contenedor {
-            width: 92%;
-            max-width: 1300px;
-            margin: auto;
-            padding: 35px 0;
+        .volver-inicio {
+            font-size: 13px;
+            padding: 8px 12px;
         }
 
-        /* ENCABEZADO */
+        .pantalla {
+            width: 95%;
+        }
 
         .encabezado {
-            text-align: center;
-            margin-bottom: 30px;
+            padding: 22px 15px 18px;
         }
 
         .logo {
-            font-size: 45px;
-            margin-bottom: 5px;
+            font-size: 36px;
         }
 
         .encabezado h1 {
-            font-size: 42px;
-            margin: 0 0 8px;
-            font-weight: 800;
-            color: #166534;
+            font-size: 32px;
         }
 
         .encabezado p {
-            color: #64748b;
-            font-size: 18px;
-            margin: 0;
+            font-size: 15px;
         }
-
-        /* TURNO ACTUAL */
 
         .turno-actual {
-            background: white;
-            border: 2px solid #bbf7d0;
-            border-radius: 25px;
-            padding: 40px;
-            text-align: center;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 35px rgba(22, 163, 74, 0.10);
+            padding: 30px 15px;
         }
-
-        .turno-actual h2 {
-            margin: 0;
-            color: #64748b;
-            font-size: 22px;
-        }
-
-        .numero {
-            font-size: 110px;
-            font-weight: 800;
-            margin: 15px 0;
-            color: #16a34a;
-            line-height: 1;
-        }
-
-        .mensaje {
-            font-size: 23px;
-            color: #475569;
-        }
-
-        /* PRÓXIMOS */
 
         .proximos {
-            background: #166534;
-            padding: 30px;
-            border-radius: 22px;
-            box-shadow: 0 10px 30px rgba(22, 101, 52, 0.15);
-        }
-
-        .proximos h2 {
-            margin: 0;
-            text-align: center;
-            color: white;
-            font-size: 25px;
+            padding: 25px 18px 30px;
         }
 
         .lista {
-            display: flex;
-            justify-content: center;
-            gap: 18px;
-            flex-wrap: wrap;
-            margin-top: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
+            gap: 12px;
         }
 
         .proximo {
-            background: white;
-            color: #166534;
-            padding: 22px 30px;
-            border-radius: 15px;
-            text-align: center;
-            min-width: 150px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.10);
+            padding: 17px 12px;
+        }
+
+    }
+
+    /* CELULAR */
+
+    @media (max-width: 500px) {
+
+        .barra-superior {
+            width: 95%;
+            padding: 10px 12px;
+        }
+
+        .marca {
+            font-size: 18px;
+        }
+
+        .volver-inicio {
+            font-size: 12px;
+            padding: 7px 10px;
+        }
+
+        .pantalla {
+            width: 95%;
+        }
+
+        .encabezado {
+            padding: 18px 12px 15px;
+        }
+
+        .logo {
+            font-size: 32px;
+        }
+
+        .encabezado h1 {
+            font-size: 27px;
+        }
+
+        .encabezado p {
+            font-size: 14px;
+        }
+
+        .turno-actual {
+            padding: 25px 12px;
+            border-radius: 18px;
+        }
+
+        .turno-actual h2 {
+            font-size: 17px;
+        }
+
+        .numero {
+            font-size: 70px;
+            margin: 15px 0;
+        }
+
+        .mensaje {
+            font-size: 17px;
+            line-height: 1.4;
+        }
+
+        .proximos {
+            padding: 22px 12px 25px;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .proximos h2 {
+            font-size: 20px;
+        }
+
+        .lista {
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .proximo {
+            padding: 14px 8px;
         }
 
         .proximo-numero {
-            font-size: 32px;
-            font-weight: 800;
+            font-size: 25px;
         }
 
         .proximo-cliente {
-            margin-top: 8px;
-            color: #64748b;
-            word-break: break-word;
-        }
-
-        .sin-turno {
-            text-align: center;
-            color: #dcfce7;
-            font-size: 18px;
-            margin-top: 20px;
-        }
-
-        /* ANIMACIÓN */
-
-        .actualizando {
-            display: inline-block;
-            margin-top: 15px;
-            color: #64748b;
             font-size: 13px;
         }
 
+    }
 
-        /* TABLET */
+</style>
 
-        @media (max-width: 800px) {
-
-            .contenedor {
-                width: 94%;
-                padding: 25px 0;
-            }
-
-            .encabezado h1 {
-                font-size: 34px;
-            }
-
-            .turno-actual {
-                padding: 35px 20px;
-            }
-
-            .numero {
-                font-size: 85px;
-            }
-
-            .mensaje {
-                font-size: 20px;
-            }
-
-            .proximos {
-                padding: 25px 18px;
-            }
-
-            .proximo {
-                min-width: 125px;
-                padding: 18px 20px;
-            }
-
-        }
-
-
-        /* CELULAR */
-
-        @media (max-width: 500px) {
-
-            .contenedor {
-                width: 94%;
-                padding: 20px 0;
-            }
-
-            .logo {
-                font-size: 35px;
-            }
-
-            .encabezado h1 {
-                font-size: 27px;
-            }
-
-            .encabezado p {
-                font-size: 15px;
-            }
-
-            .turno-actual {
-                padding: 28px 15px;
-                border-radius: 18px;
-                margin-bottom: 20px;
-            }
-
-            .turno-actual h2 {
-                font-size: 18px;
-            }
-
-            .numero {
-                font-size: 70px;
-                margin: 18px 0;
-            }
-
-            .mensaje {
-                font-size: 17px;
-                line-height: 1.4;
-            }
-
-            .proximos {
-                padding: 22px 12px;
-                border-radius: 18px;
-            }
-
-            .proximos h2 {
-                font-size: 20px;
-            }
-
-            .lista {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-
-            .proximo {
-                min-width: 0;
-                padding: 15px 10px;
-            }
-
-            .proximo-numero {
-                font-size: 25px;
-            }
-
-            .proximo-cliente {
-                font-size: 14px;
-            }
-
-        }
-
-    </style>
 
 </head>
 
 <body>
 
-    <div class="contenedor">
 
-        <!-- ENCABEZADO -->
+<!-- BARRA SUPERIOR -->
 
-        <div class="encabezado">
+<header class="barra-superior">
 
-            <div class="logo">
-                🎫
-            </div>
-
-            <h1>
-                Turno Fácil
-            </h1>
-
-            <p>
-                Pantalla de atención al cliente
-            </p>
-
-        </div>
-
-
-        <!-- TURNO ACTUAL -->
-
-        <div class="turno-actual">
-
-            <h2>
-                🔔 TURNO EN ATENCIÓN
-            </h2>
-
-            {% if turno_actual %}
-
-                <div class="numero">
-                    #{{ turno_actual.numero }}
-                </div>
-
-                <div class="mensaje">
-                    Por favor, diríjase al módulo de atención.
-                </div>
-
-                <div class="actualizando">
-                    Sistema actualizado automáticamente
-                </div>
-
-            {% else %}
-
-                <div class="numero">
-                    —
-                </div>
-
-                <div class="mensaje">
-                    No hay ningún turno en atención.
-                </div>
-
-            {% endif %}
-
-        </div>
-
-
-        <!-- PRÓXIMOS TURNOS -->
-
-        <div class="proximos">
-
-            <h2>
-                📋 Próximos turnos
-            </h2>
-
-            {% if proximos_turnos %}
-
-                <div class="lista">
-
-                    {% for turno in proximos_turnos %}
-
-                        <div class="proximo">
-
-                            <div class="proximo-numero">
-                                #{{ turno.numero }}
-                            </div>
-
-                            <div class="proximo-cliente">
-                                {{ turno.cliente }}
-                            </div>
-
-                        </div>
-
-                    {% endfor %}
-
-                </div>
-
-            {% else %}
-
-                <div class="sin-turno">
-                    No hay turnos pendientes.
-                </div>
-
-            {% endif %}
-
-        </div>
-
+    <div class="marca">
+        🎫 Turno Fácil
     </div>
 
+    <a href="{% url 'inicio' %}" class="volver-inicio">
+        ← Volver al inicio
+    </a>
 
-    <script>
+</header>
 
-        setInterval(function() {
-            location.reload();
-        }, 3000);
 
-    </script>
+<!-- PANTALLA PRINCIPAL -->
+
+<main class="pantalla">
+
+
+    <!-- ENCABEZADO -->
+
+    <section class="encabezado">
+
+        <div class="logo">
+            🎫
+        </div>
+
+        <h1>
+            Turno Fácil
+        </h1>
+
+        <p>
+            Pantalla de atención al cliente
+        </p>
+
+    </section>
+
+
+    <!-- TURNO ACTUAL -->
+
+    <section class="turno-actual">
+
+        <h2>
+            🔔 TURNO EN ATENCIÓN
+        </h2>
+
+        {% if turno_actual %}
+
+            <div class="numero">
+                #{{ turno_actual.numero }}
+            </div>
+
+            <div class="mensaje">
+                Por favor, diríjase al módulo de atención.
+            </div>
+
+            <div class="actualizando">
+                Sistema actualizado automáticamente
+            </div>
+
+        {% else %}
+
+            <div class="numero">
+                —
+            </div>
+
+            <div class="mensaje">
+                No hay ningún turno en atención.
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- PRÓXIMOS TURNOS -->
+
+    <section class="proximos">
+
+        <h2>
+            📋 Próximos turnos
+        </h2>
+
+        {% if proximos_turnos %}
+
+            <div class="lista">
+
+                {% for turno in proximos_turnos %}
+
+                    <div class="proximo">
+
+                        <div class="proximo-numero">
+                            #{{ turno.numero }}
+                        </div>
+
+                        <div class="proximo-cliente">
+                            {{ turno.cliente }}
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="sin-turno">
+                No hay turnos pendientes.
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+
+<!-- ACTUALIZACIÓN AUTOMÁTICA -->
+
+<script>
+
+    setInterval(function() {
+        location.reload();
+    }, 3000);
+
+</script>
+
 
 </body>
 
